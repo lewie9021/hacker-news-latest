@@ -1,0 +1,30 @@
+{
+  "name": "redux-hackernews",
+  "version": "1.0.0",
+  "description": "Simple HackerNews API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lewie9021/redux-hackernews.git"
+  },
+  "keywords": [
+    "hackernews",
+    "express",
+    "promises",
+    "api"
+  ],
+  "author": "Lewis Barnes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lewie9021/redux-hackernews/issues"
+  },
+  "homepage": "https://github.com/lewie9021/redux-hackernews#readme",
+  "dependencies": {
+    "bluebird": "3.0.5",
+    "express": "4.13.3",
+    "node-fetch": "1.3.3"
+  }
+}
