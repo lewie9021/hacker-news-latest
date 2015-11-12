@@ -1,5 +1,5 @@
 {
-  "name": "redux-hackernews",
+  "name": "redux-hackernews-server",
   "version": "1.0.0",
   "description": "Simple HackerNews API",
   "main": "index.js",
