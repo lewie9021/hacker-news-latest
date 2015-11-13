@@ -8,6 +8,9 @@ function App({dispatch, stories}) {
     return (
         <div>
             <h1>Latest Hacker News Stories</h1>
+            <button onClick={() => dispatch(requestStories())}>
+                Request Stories
+            </button>
             <Stories stories={stories} />
         </div>
     );
