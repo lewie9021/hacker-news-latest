@@ -1,5 +1,6 @@
+var Path = require("path");
+var Webpack = require("webpack");
 var Config = require("webpack-configurator");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (function() {
     var config = new Config();
@@ -7,13 +8,18 @@ module.exports = (function() {
     config.merge({
         devtool: "source-map",
         watch: true,
-        entry: "./src/app.entry.js",
+        entry: [
+            "webpack-hot-middleware/client",
+            "./app.entry.js"
+        ],
         output: {
-            path: __dirname + "/dist",
-            filename: "bundle.js"
+            path: Path.join(__dirname, "dist"),
+            filename: "bundle.js",
+            publicPath: "/dist/"
         },
         resolve: {
-            root: __dirname + "/src"
+            root: Path.join(__dirname, "src"),
+            extensions: ["", ".js", ".jsx"]
         }
     });
 
@@ -21,14 +27,11 @@ module.exports = (function() {
         test: /\.jsx?/,
         exclude: /node_modules/,
         query: {
-            presets: ["es2015"]
+            presets: ["es2015", "react"]
         }
     });
 
-    config.plugin("html-webpack", HtmlWebpackPlugin, [{
-        title: "HackerNews (Redux)",
-        inject: "body"
-    }]);
+    config.plugin("webpack-hot-module-replacement", Webpack.HotModuleReplacementPlugin);
 
     return config.resolve();
 })();
