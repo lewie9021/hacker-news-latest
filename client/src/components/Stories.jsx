@@ -1,14 +1,15 @@
 import React from "react";
+import Story from "./Story";
+
+var styles = {
+    listStyleType: "none",
+};
 
 function Stories({stories}) {
     return (
-        <ul>
+        <ul style={styles}>
             {stories.map((story) => (
-                <li key={story.get("id")}>
-                    <span>{story.get("id")}</span>
-                    <span> | </span>
-                    <span>{story.get("title")}</span>
-                </li>
+                 <Story key={story.get("id")} story={story} />
             ))}
         </ul>
     );
