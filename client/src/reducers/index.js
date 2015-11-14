@@ -12,7 +12,9 @@ function RootReducer(state = initialState, action) {
         case REQUEST_STORIES:
             return state.set("isFetching", true);
         case RECEIVE_STORIES:
-            return state.set("stories", Immutable.fromJS(action.stories));
+            return state
+                .set("stories", Immutable.fromJS(action.stories))
+                .set("isFetching", false);
     }
     
     return state;
