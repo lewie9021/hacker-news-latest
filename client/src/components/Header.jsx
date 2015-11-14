@@ -14,7 +14,8 @@ const styles = {
         borderRadius: "4px"
     },
     title: {
-        fontSize: "32px"
+        fontSize: "32px",
+        fontWeight: "bold"
     }
 };
 
@@ -25,7 +26,7 @@ function Header({title, actions, isFetching}) {
               style={styles.button}
               onClick={actions.fetchStories}
               disabled={isFetching}>
-                {isFetching ? "Fetching, Please Wait" : "Request Latest Stories"}
+                {isFetching ? "Fetching Stories..." : "Request Latest Stories"}
             </button>
             <div style={styles.title}>{title}</div>
         </div>
