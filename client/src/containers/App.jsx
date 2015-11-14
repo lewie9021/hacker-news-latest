@@ -21,16 +21,8 @@ function App({dispatch, stories}) {
 
 // TODO: Could probably use this to do pagination too.
 function select(state) {
-    const stories = state.get("stories");
-    const storiesByID = stories.reduce((storiesByID, story) => {
-        const storyID = story.get("id");
-        
-        return storiesByID.set(storyID, story);
-    }, Map());
-    
     return {
-        storiesByID,
-        stories
+        stories: state.get("stories")
     };
 };
 
