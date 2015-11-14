@@ -1,5 +1,6 @@
 import React from "react";
 
+const hackerNewsURL = "https://news.ycombinator.com";
 const styles = {
     listItem: {
         borderStyle: "solid",
@@ -23,6 +24,7 @@ const styles = {
 }
 
 function Story({story, index}) {
+    const author = story.get("by");
     const listItemStyles = index ? styles.listItem : Object.assign({}, styles.listItem, {
         borderTopWidth: "1px"
     });
@@ -31,7 +33,9 @@ function Story({story, index}) {
         <li style={listItemStyles}>
             <strong style={styles.title}>{story.get("title")}</strong>
             <div style={styles.details}>
-                <span>{story.get("score")} points</span>
+                <span>{`${story.get("score")} points`}</span>
+                <span> | </span>
+                <a style={styles.link} href={`${hackerNewsURL}/user?id=${author}`}>{author}</a>
                 <span> | </span>
                 <a style={styles.link} href={story.get("url")}>link</a>
             </div>
