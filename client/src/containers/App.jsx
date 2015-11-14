@@ -3,17 +3,19 @@ import { Map } from "immutable";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as Actions from "../actions";
+import Header from "../components/Header";
 import Stories from "../components/Stories";
 
 function App({dispatch, stories, isFetching}) {
-    const {fetchStories} = bindActionCreators(Actions, dispatch);
+    const actions = bindActionCreators(Actions, dispatch);
     
     return (
         <div>
-            <h1>Latest Hacker News Stories</h1>
-            <button onClick={fetchStories} disabled={isFetching}>
-                {isFetching ? "Fetching..." : "Request Stories"}
-            </button>
+            <Header
+                title={"Hacker News (Redux)"}
+                actions={actions}
+                isFetching={isFetching}
+            />
             <Stories stories={stories} />
         </div>
     );
