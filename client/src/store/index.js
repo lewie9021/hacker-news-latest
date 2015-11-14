@@ -1,9 +1,21 @@
+import { Iterable } from "immutable";
 import { createStore, applyMiddleware } from "redux";
 import Thunk from "redux-thunk";
+import CreateLogger from "redux-logger";
 import RootReducer from "../reducers";
 
 const createStoreWithMiddleware = applyMiddleware(
-    Thunk // Provides a way to handle async action creators.
+    // Provides a way to handle async action creators.
+    Thunk,
+    // Log in console when actions are triggering, showing store mutations.
+    CreateLogger({
+        // Collapse actions to console cluttering.
+        collapsed: true,
+        // Since we are working with Immutable, we need to render state as plain objects.
+        transformer: function(state) {
+            return Iterable.isIterable(state) ? state.toJS() : state;
+        }
+    })
 )(createStore);
 
 export default function configureStore(initialState) {
