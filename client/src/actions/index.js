@@ -1,6 +1,28 @@
+import Fetch from "isomorphic-fetch";
+
 export const REQUEST_STORIES = "REQUEST_STORIES";
-export function requestStories() {
+function requestStories() {
     return {
         type: REQUEST_STORIES
+    };
+}
+
+export const RECEIVE_STORIES = "RECEIVE_STORIES";
+function receieveStories(stories) {
+    return {
+        type: RECEIVE_STORIES,
+        stories
+    };
+}
+
+export function fetchStories() {
+    // Given we are using the Thunk middleware, the
+    // dispatch object is automagically passed to us.
+    return function(dispatch) {
+        dispatch(requestStories());
+        
+        return Fetch("http://localhost:8080/latest")
+            .then(response => response.json())
+            .then(stories => dispatch(receieveStories(stories)));
     };
 }
