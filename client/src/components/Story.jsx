@@ -1,6 +1,6 @@
 import React from "react";
+import Moment from "moment";
 
-const hackerNewsURL = "https://news.ycombinator.com";
 const styles = {
     listItem: {
         borderStyle: "solid",
@@ -21,10 +21,20 @@ const styles = {
     link: {
         color: "#ccc"
     }
+};
+
+function getHackerNewsURL(collection, id) {
+    return `https://news.ycombinator.com/${collection}?id=${id}`;
+}
+
+function calculateRelativeTime(createdTimeStamp) {
+    return Moment(createdTimeStamp * 1000).fromNow();
 }
 
 function Story({story, index}) {
-    const author = story.get("by");
+    const authorID = story.get("by");
+    const storyID = story.get("id");
+    const relativeTime = calculateRelativeTime(story.get("time"));
     const listItemStyles = index ? styles.listItem : Object.assign({}, styles.listItem, {
         borderTopWidth: "1px"
     });
@@ -35,7 +45,9 @@ function Story({story, index}) {
             <div style={styles.details}>
                 <span>{`${story.get("score")} points`}</span>
                 <span> | </span>
-                <a style={styles.link} href={`${hackerNewsURL}/user?id=${author}`}>{author}</a>
+                <a style={styles.link} href={getHackerNewsURL("user", authorID)}>{authorID}</a>
+                <span> | </span>
+                <a style={styles.link} href={getHackerNewsURL("item", storyID)}>{relativeTime}</a>
                 <span> | </span>
                 <a style={styles.link} href={story.get("url")}>link</a>
             </div>
