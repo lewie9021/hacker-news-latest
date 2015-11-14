@@ -12,9 +12,9 @@ function App({dispatch, stories, isFetching}) {
     return (
         <div>
             <Header
-                title={"Hacker News (Redux)"}
-                actions={actions}
-                isFetching={isFetching}
+              title={"Hacker News (Redux)"}
+              actions={actions}
+              isFetching={isFetching}
             />
             <Stories stories={stories} />
         </div>
