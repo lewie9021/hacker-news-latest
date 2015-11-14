@@ -4,6 +4,7 @@ var Fetch = require('node-fetch');
 
 var app = Express();
 var hackerNewsAPI = "https://hacker-news.firebaseio.com/v0/";
+var port = 8080;
 
 // In-memory cache.
 // TODO: Dumpt to file in intervals (if new stories have been added).
@@ -14,6 +15,12 @@ var cache = {
 function parseJSON(response) {
     return response.json();
 }
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+
+    next();
+});
 
 app.get("/latest", function (req, res) {
     Fetch(hackerNewsAPI + "newstories.json")
@@ -51,7 +58,7 @@ app.get("/latest", function (req, res) {
         });
 });
 
-var server = app.listen(3000, function() {
-    console.log("HackerNews API listening on port", server.address().port);
+var server = app.listen(port, function() {
+    console.log("HackerNews API listening on port", port);
 });
 
