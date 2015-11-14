@@ -16,9 +16,10 @@ function receieveStories(stories) {
 }
 
 export const FAILED_STORIES = "FAILED_STORIES";
-function failedStories(stories) {
+function failedStories(error) {
     return {
-        type: FAILED_STORIES
+        type: FAILED_STORIES,
+        error
     };
 }
 
