@@ -1,6 +1,6 @@
 import React from "react";
 
-var styles = {
+const styles = {
     borderTop: "1px solid black",
     padding: "12px"
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import Story from "./Story";
 
-var styles = {
+const styles = {
     listStyleType: "none",
 };
 
