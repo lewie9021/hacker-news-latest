@@ -15,6 +15,13 @@ function receieveStories(stories) {
     };
 }
 
+export const FAILED_STORIES = "FAILED_STORIES";
+function failedStories(stories) {
+    return {
+        type: FAILED_STORIES
+    };
+}
+
 export function fetchStories() {
     // Given we are using the Thunk middleware, the
     // dispatch object is automagically passed to us.
@@ -23,6 +30,7 @@ export function fetchStories() {
         
         return Fetch("http://localhost:8080/latest")
             .then(response => response.json())
-            .then(stories => dispatch(receieveStories(stories)));
+            .then(stories => dispatch(receieveStories(stories)))
+            .catch(err => dispatch(failedStories(err)));
     };
 }
