@@ -7,9 +7,9 @@ var hackerNewsAPI = "https://hacker-news.firebaseio.com/v0/";
 var port = 8080;
 
 // In-memory cache.
-// TODO: Dumpt to file in intervals (if new stories have been added).
+// TODO: Dump to file in intervals (if new items have been added).
 var cache = {
-    stories: {}
+    items: {}
 };
 
 function parseJSON(response) {
@@ -25,35 +25,45 @@ app.use(function(req, res, next) {
 app.get("/latest", function (req, res) {
     Fetch(hackerNewsAPI + "newstories.json")
         .then(parseJSON)
-        .then(function(storyIDs) {
-            // At this point we have a list of IDs mapping to the latests stories.
-            var requests = storyIDs
-                    // Filter out stories we already have in cache.
-                    .filter(function(storyID) {
-                        return !cache.stories[storyID];
+        .then(function(itemIDs) {
+            // At this point we have a list of IDs mapping to the latests items.
+            var requests = itemIDs
+                    // Only deal with the top 50 most recent items.
+                    .slice(0, 50)
+                    // Filter out items we already have in cache.
+                    .filter(function(itemID) {
+                        return !cache.items[itemID];
                     })
-                    // Return an array of request promises to fetch uncached stories.
-                    .map(function(storyID) {
-                        return Fetch(hackerNewsAPI + "item/" + storyID + ".json")
+                    // Return an array of request promises to fetch uncached items.
+                    .map(function(itemID) {
+                        return Fetch(hackerNewsAPI + "item/" + itemID + ".json")
                             .then(parseJSON);
                     });
 
             console.log("new requests:", requests.length);
             
             Promise.all(requests)
-                .then(function(newStories) {
-                    // Cache each new story to make future requests instant.
-                    newStories.forEach(function(story, index) {
-                        if (!story)
-                            return console.log(story, index);
-                            
-                        cache.stories[story.id] = story;
+                .then(function(newItems) {
+                    // Cache each new item to make future requests instant.
+                    newItems.forEach(function(item, index) {
+                        if (!item)
+                            return console.log(item, index);
+                        
+                        cache.items[item.id] = item;
                     });
-
-                    // Return the complete set of new stories (merge of cached and live stories).
-                    res.json(storyIDs.map(function(storyID) {
-                        return cache.stories[storyID];
-                    }));
+                    
+                    // Return the complete set of stories (merge of cached and live stories).
+                    res.json(
+                        itemIDs
+                            // Map item IDs to their details we have in cache.
+                            .map(function(itemID) {
+                                return cache.items[itemID];
+                            })
+                            // Filter out items that aren't stories.
+                            .filter(function(item) {
+                                return item && item.type == "story";
+                            })
+                    );
                 });
         });
 });
