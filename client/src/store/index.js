@@ -3,6 +3,7 @@ import { createStore, applyMiddleware } from "redux";
 import Thunk from "redux-thunk";
 import CreateLogger from "redux-logger";
 import RootReducer from "../reducers";
+import { fetchStories } from "../actions";
 
 const createStoreWithMiddleware = applyMiddleware(
     // Provides a way to handle async action creators.
@@ -20,6 +21,8 @@ const createStoreWithMiddleware = applyMiddleware(
 
 export default function configureStore(initialState) {
     const store = createStoreWithMiddleware(RootReducer, initialState);
+
+    store.dispatch(fetchStories());
 
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers.
