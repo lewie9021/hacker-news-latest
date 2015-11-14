@@ -6,12 +6,12 @@ import * as Actions from "../actions";
 import Stories from "../components/Stories";
 
 function App({dispatch, stories}) {
-    const {requestStories} = bindActionCreators(Actions, dispatch);
+    const {fetchStories} = bindActionCreators(Actions, dispatch);
     
     return (
         <div>
             <h1>Latest Hacker News Stories</h1>
-            <button onClick={requestStories}>
+            <button onClick={fetchStories}>
                 Request Stories
             </button>
             <Stories stories={stories} />
