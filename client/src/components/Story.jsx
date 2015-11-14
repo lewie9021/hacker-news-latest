@@ -33,7 +33,7 @@ function calculateRelativeTime(createdTimeStamp) {
 
 function Story({story, index}) {
     const authorID = story.get("by");
-    const storyID = story.get("id");
+    const itemURL = getHackerNewsURL("item", story.get("id"));
     const relativeTime = calculateRelativeTime(story.get("time"));
     const listItemStyles = index ? styles.listItem : Object.assign({}, styles.listItem, {
         borderTopWidth: "1px"
@@ -47,7 +47,9 @@ function Story({story, index}) {
                 <span> | </span>
                 <a style={styles.link} href={getHackerNewsURL("user", authorID)}>{authorID}</a>
                 <span> | </span>
-                <a style={styles.link} href={getHackerNewsURL("item", storyID)}>{relativeTime}</a>
+                <a style={styles.link} href={itemURL}>{relativeTime}</a>
+                <span> | </span>
+                <a style={styles.link} href={itemURL}>{`${story.get("descendants")} comments`}</a>
                 <span> | </span>
                 <a style={styles.link} href={story.get("url")}>link</a>
             </div>
