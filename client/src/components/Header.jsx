@@ -26,7 +26,7 @@ function Header({title, actions, isFetching}) {
               style={styles.button}
               onClick={actions.fetchStories}
               disabled={isFetching}>
-                {isFetching ? "Fetching Stories..." : "Request Latest Stories"}
+                {isFetching ? "Fetching Stories..." : "Fetch Latest Stories"}
             </button>
             <div style={styles.title}>{title}</div>
         </div>
