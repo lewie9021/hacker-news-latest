@@ -11,7 +11,7 @@ function Stories({stories}) {
         <ul style={styles}>
             {stories.map((story, index) => (
                  <Story
-                   key={story.get("id")}
+                   key={index}
                    index={index}
                    story={story}
                  />
