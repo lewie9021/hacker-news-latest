@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import * as Actions from "../actions";
 import Header from "../components/Header";
 import Stories from "../components/Stories";
+import Alert from "../components/Alert";
 
-function App({dispatch, stories, isFetching}) {
+function App({dispatch, stories, isFetching, fetchError}) {
     const actions = bindActionCreators(Actions, dispatch);
     
     return (
@@ -16,6 +17,7 @@ function App({dispatch, stories, isFetching}) {
               actions={actions}
               isFetching={isFetching}
             />
+            {fetchError ? <Alert message={"Failed to fetch latest stories"} /> : null}
             <Stories stories={stories} />
         </div>
     );
@@ -25,6 +27,7 @@ function App({dispatch, stories, isFetching}) {
 function select(state) {
     return {
         isFetching: state.get("isFetching"),
+        fetchError: state.get("fetchError"),
         stories: state.get("stories")
     };
 };
