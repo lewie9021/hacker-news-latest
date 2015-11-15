@@ -18,7 +18,7 @@ This will launch up an Express web server at localhost:8080.
 
 - [Express](https://www.npmjs.com/package/express)
 - [Bluebird](https://www.npmjs.com/package/bluebird)
-- [Fetch](https://www.npmjs.com/package/isomorphic-fetch)
+- [Fetch](https://www.npmjs.com/package/node-fetch)
 
 ### Future Improvements
 
