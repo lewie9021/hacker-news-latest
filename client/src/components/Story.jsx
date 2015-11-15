@@ -10,7 +10,8 @@ const styles = {
         padding: "12px"
     },
     title: {
-        display: "block",
+        display: "inline-block",
+        textDecoration: "none",
         marginBottom: "6px",
         color: "#666"
     },
@@ -41,7 +42,9 @@ function Story({story, index}) {
 
     return (
         <li style={listItemStyles}>
-            <strong style={styles.title}>{story.get("title")}</strong>
+            <a href={itemURL} style={styles.title}>
+                <strong>{story.get("title")}</strong>
+            </a>
             <div style={styles.details}>
                 <span>{`${story.get("score")} points`}</span>
                 <span> | </span>
@@ -50,8 +53,6 @@ function Story({story, index}) {
                 <a style={styles.link} href={itemURL}>{relativeTime}</a>
                 <span> | </span>
                 <a style={styles.link} href={itemURL}>{`${story.get("descendants")} comments`}</a>
-                <span> | </span>
-                <a style={styles.link} href={story.get("url")}>link</a>
             </div>
         </li>
     );
