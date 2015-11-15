@@ -10,7 +10,7 @@ const styles = {
         padding: "10px",
         border: "0px",
         color: "#fff",
-        backgroundColor: "#337ab7",
+        backgroundColor: "#286090",
         borderRadius: "4px"
     },
     title: {
@@ -20,10 +20,14 @@ const styles = {
 };
 
 function Header({title, actions, isFetching}) {
+    const buttonStyle = isFetching ? Object.assign({}, styles.button, {
+        backgroundColor: "#337ab7"
+    }) : styles.button;
+    
     return (
         <div style={styles.header}>
             <button
-              style={styles.button}
+              style={buttonStyle}
               onClick={actions.fetchStories}
               disabled={isFetching}>
                 {isFetching ? "Fetching Stories..." : "Fetch Latest Stories"}
