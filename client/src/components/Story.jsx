@@ -36,9 +36,7 @@ function Story({story, index}) {
     const authorID = story.get("by");
     const itemURL = getHackerNewsURL("item", story.get("id"));
     const relativeTime = calculateRelativeTime(story.get("time"));
-    const listItemStyles = index ? styles.listItem : Object.assign({}, styles.listItem, {
-        borderTopWidth: "1px"
-    });
+    const listItemStyles = index ? styles.listItem : {...styles.listItem, borderTopWidth: "1px"};
 
     return (
         <li style={listItemStyles}>

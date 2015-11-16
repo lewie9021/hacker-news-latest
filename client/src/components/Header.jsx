@@ -20,9 +20,7 @@ const styles = {
 };
 
 function Header({title, actions, isFetching}) {
-    const buttonStyle = isFetching ? Object.assign({}, styles.button, {
-        backgroundColor: "#337ab7"
-    }) : styles.button;
+    const buttonStyle = isFetching ? {...styles.button, backgroundColor: "#337ab7"} : styles.button;
     
     return (
         <div style={styles.header}>
