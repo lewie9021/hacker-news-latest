@@ -12,18 +12,18 @@ After reading a large potion of the [offical documentation](http://rackt.org/red
 
 At the start of the week, I began reading the official Redux documentation. It was nice to see that each part had its own section, making it easier to digest the core concepts. If it had been a continuous stream of text, I'd have likely found myself attempting to read the entire documentation all at once. Browsing the project's [GitHub repository](https://github.com/rackt/redux/) revealed the docs are frequently kept update with any API changes and/or helpful tips and tricks.
 
-When I began working on my project, I found the code examples were great, offering guidance on how I should connect the pieces of Redux together. It was quite refreshing to find there were [other examples](http://rackt.org/redux/docs/introduction/Examples) that didn't just focus on the generic TODO application.
+I found the offical code examples to be a great help, offering guidance on how I should connect the pieces of Redux together. It was quite refreshing to find [other examples](http://rackt.org/redux/docs/introduction/Examples), not just the generic TODO application.
 
-Although the code examples demonstrated how one could use Redux in practice, I was still unsure how an action made its way through the application. Luckily, I found [this article](https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6) that personified the Redux architecture through a series of interesting cartoon drawings.
+At this point, I was still unsure how actions made their way through the application. Luckily, I found [this article](https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6) that personified the Redux architecture through a series of interesting cartoon drawings.
 
 **Immutable**
 
-Lee Byron, the author of a library called [Immutable](https://github.com/facebook/immutable-js), gave an [outstanding talk](https://www.youtube.com/watch?v=I7IdS-PbEgI) at React Conf early this year. He demonstrated some of the great advantages developers could harness with immutable data structures. Naturally, some of the talk was set around how to increase the performance of React by using the shouldComponentUpdate lifecycle hook.
+Lee Byron, the author of a library called [Immutable](https://github.com/facebook/immutable-js), gave an [outstanding talk](https://www.youtube.com/watch?v=I7IdS-PbEgI) at React Conf early this year. He demonstrated some of the great advantages developers could harness with immutable data structures. Naturally, some of the talk was base around how to increase the performance of React by using the shouldComponentUpdate lifecycle hook.
 
 One of the reasons immutable data structures are so powerful is because mutations return new object references. This makes comparing state changes trivial, as only reference checks are required as opposed to deep comparison checks (dirty checking).
 
 As it turns out, immutable data structures are an integral part to Redux. It's how the store determines if a change has been made by a reducer.
 
-Unfortunately, my experience with Immutable was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong when troubleshooting. I found the best way was to just experiment in the console.
+Unfortunately, my experience with Immutable was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong when I was troubleshooting. In the end, I found the best way was to just experiment in the console.
 
-Through perseverance, I was able to grasp the fundamentals of Immutable, and found it was a great combination with Redux. In comparison to the examples that used Object.assign, the logic inside the reducers felt much cleaner and easier to read.
+Through perseverance, I was able to grasp the fundamentals of Immutable, and found it was a great combination with Redux. In comparison to the official examples which used Object.assign, the logic inside the reducers felt much cleaner and easier to read.
