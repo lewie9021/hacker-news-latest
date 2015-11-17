@@ -14,7 +14,7 @@ At the start of the week, I began reading the official Redux documentation. It w
 
 I found the offical code examples to be a great help, offering guidance on how I should connect the pieces of Redux together. It was quite refreshing to find [other examples](http://rackt.org/redux/docs/introduction/Examples), not just the generic TODO application.
 
-At this point, I was still unsure how actions made their way through the application. Luckily, I found [this article](https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6) that personified the Redux architecture through a series of interesting cartoon drawings.
+At this point however, I was still unsure how actions made their way through the application. Luckily, I found [this article](https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6) that personified the Redux architecture through a series of interesting cartoon drawings.
 
 **Immutable**
 
@@ -24,6 +24,6 @@ One of the reasons immutable data structures are so powerful is because mutation
 
 As it turns out, immutable data structures are an integral part to Redux. It's how the store determines if a change has been made by a reducer.
 
-Unfortunately, my experience with Immutable was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong when I was troubleshooting. In the end, I found the best way was to just experiment in the console.
+Unfortunately, my experience with Immutable was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong while troubleshooting. In the end, I found the best way was to just experiment in the console.
 
-Through perseverance, I was able to grasp the fundamentals of Immutable, and found it was a great combination with Redux. In comparison to the official examples which used Object.assign, the logic inside the reducers felt much cleaner and easier to read.
+Through perseverance, I was able to grasp the fundamentals of Immutable, and found it was a great combination with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
