@@ -27,3 +27,11 @@ As it turns out, immutable data structures are an integral part to Redux. It's h
 Unfortunately, my experience with Immutable was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong while troubleshooting. In the end, I found the best way was to just experiment in the console.
 
 Through perseverance, I was able to grasp the fundamentals of Immutable, and found it was a great combination with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
+
+**Inline Styles**
+
+I tried to stay away from CSS throughout this project as an opportunity to explore inline styles with React. It was an interesting experience. I was able to tweak the styling of the application in a much more direct approach. With CSS, you have to do this via proxy, that is, to apply a particular CSS class to an element. While this helps to keep the markup clean, it does leave your UI open to bugs. The JavaScript doesn't have full control over what styles are applied. It has to make an assumption that there is a CSS rule somewhere in your stylesheet(s) that will take care of it.
+
+While the majority of the experience went quite well, I did however run into a problem regarding the :hover state of an element. Although you could in fact implement this using a combination of mouse enter/leave events and a hover state property, it certainly isn't as elegant as the CSS counterpart. A more difficult problem would be to implement media queries such that an onresize event handler isn't attached for each component that's mounted.
+
+Since the focus of this project was to understand Redux, I decided to opt out of an inline style solution when it came to anything more advanced such as element state styles and media queries. Instead, I created a style tag in the main HTML file (it didn't feel necessary to add both style-loader and css-loader to my Webpack configuration for a few lines of styling). Going forward, I would like to investigate a solution such as Radium that tries to solve these problems.
