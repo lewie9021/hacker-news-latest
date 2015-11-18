@@ -28,6 +28,16 @@ Unfortunately, my experience with Immutable was far from a walk in the park. The
 
 Through perseverance, I was able to grasp the fundamentals of Immutable, and found it was a great combination with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
 
+**Central App State**
+
+The idea of using a single store for the entire application felt quite intimidating. In the original Flux implementation, an application could have several stores, each responsible for a particular domain. The question with Redux was:
+
+> How would I structure the store of a large application with several screens and a lot of user interaction?
+
+I found the best advice was to structure the store in a similar way to a relational database. Normalization could be implemented to reduce issues that arise, trying to keep the same data in several places in sync. I've yet to look further into route-driven applications with Redux, but I could imagine the store would contain a 'routes' property at the top level that maps route paths to route specific state. Route state would be kept minimal, often storing foreign keys pointing to other areas of the store (in this application, it would contain story IDs rather than the actual stories).
+
+If a user stumbles upon an error, having the entire application state in a single object can be very beneficial. Bug reporting could be implemented by simply sending a dump of the application state at the time the bug occurred. Later, a developer could replace their application state with that of the user, making the debugging process much slicker. Improving this, the bug reporter could also send the last 10 actions that were triggered, providing hints on what the user was attempting to achieve.
+
 **Inline Styles**
 
 I tried to stay away from CSS throughout this project as an opportunity to explore inline styles with React. It was an interesting experience. I was able to tweak the styling of the application in a much more direct approach. With CSS, you have to do this via proxy, that is, to apply a particular CSS class to an element. While this helps to keep the markup clean, it does leave your UI open to bugs. The JavaScript doesn't have full control over what styles are applied. It has to make an assumption that there is a CSS rule somewhere in your stylesheet(s) that will take care of it.
