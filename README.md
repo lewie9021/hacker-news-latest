@@ -38,6 +38,10 @@ I found the best advice was to structure the store in a similar way to a relatio
 
 If a user stumbles upon an error, having the entire application state in a single object can be very beneficial. Bug reporting could be implemented by simply sending a dump of the application state at the time the bug occurred. Later, a developer could replace their application state with that of the user, making the debugging process much slicker. Improving this, the bug reporter could also send the last 10 actions that were triggered, providing hints on what the user was attempting to achieve.
 
+**Hot Module Replacement**
+
+A benefit of Redux is that the store isn't coupled with the logic that handles mutations. This means reducers can be [hot swapped](https://webpack.github.io/docs/hot-module-replacement) without taking out the application state in the process, making iterations extremely fast! Unfortunately, I wasn't able to apply hot swapping for React components during the development of this project due to the major Babel 6 update.
+
 **Inline Styles**
 
 I tried to stay away from CSS throughout this project as an opportunity to explore inline styles with React. It was an interesting experience. I was able to tweak the styling of the application in a much more direct approach. With CSS, you have to do this via proxy, that is, to apply a particular CSS class to an element. While this helps to keep the markup clean, it does leave your UI open to bugs. The JavaScript doesn't have full control over what styles are applied. It has to make an assumption that there is a CSS rule somewhere in your stylesheet(s) that will take care of it.
