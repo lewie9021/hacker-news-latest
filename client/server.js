@@ -3,7 +3,7 @@ var Express = require("express");
 var Webpack = require("webpack");
 var WebpackDevMiddleware = require("webpack-dev-middleware");
 var WebpackHotMiddleware = require("webpack-hot-middleware");
-var Config = require("./webpack.config");
+var Config = require("./config/dev/webpack.config");
 
 var app = Express();
 var port = 3000;
@@ -12,7 +12,7 @@ var compiler = Webpack(Config);
 
 app.use(WebpackDevMiddleware(compiler, {
     noInfo: true,
-    publicPath: Config.output.publicPath,
+    publicPath: "/dist/",
     stats: {
         colors: true
     }
