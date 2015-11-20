@@ -30,27 +30,7 @@ module.exports = function(config) {
             "mocha"
         ],
         
-        webpack: {
-            devtool: "source-map",
-            watch: true,
-            entry: Path.join(__dirname, "app.entry.js"),
-            resolve: {
-                root: Path.join(__dirname, "src"),
-                extensions: ["", ".js", ".jsx"]
-            },
-            module: {
-                loaders: [
-                    {
-                        test: /\.jsx?/,
-                        exclude: /node_modules/,
-                        loader: "babel",
-                        query: {
-                            presets: ["es2015", "stage-2", "react"]
-                        }
-                    }
-                ]
-            }
-        },
+        webpack: require("./webpack.config"),
 
         webpackMiddleware: {
             noInfo: true
