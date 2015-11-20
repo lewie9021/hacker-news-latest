@@ -22,7 +22,6 @@ module.exports = function(config) {
         
         frameworks: [
             "mocha",
-            "chai",
             "chai-sinon"
         ],
         
@@ -45,7 +44,6 @@ module.exports = function(config) {
             require("karma-mocha-reporter"),
 
             // Enable Chai and Sinon.
-            require("karma-chai"),
             require("karma-chai-sinon"),
             
             // Make source mapping work correctly.
