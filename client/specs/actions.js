@@ -8,37 +8,65 @@ const mockStore = ConfigureStore([
     Thunk
 ]);
 
-describe("Async Actions", function() {
-    
-    it("should fetch stories", function(done) {
-        // Create a mock story.
-        const story = {
-            id: 1,
-            title: "Hello World",
-            url: "https://www.example.com",
-            by: "John Smith"
-        };
+describe("Async Actions", () => {
 
-        // Initial state of the store
-        const initialState = {};
-        // List out the actions we expect to fire (order matters).
-        const expectedActions = [
-            {type: actions.REQUEST_STORIES},
-            {type: actions.RECEIVE_STORIES, stories: [story]}
-        ];
-        // Construct our mock store.
-        const store = mockStore(initialState, expectedActions, done);
+    describe("fetchStories", () => {
 
-        // Mock the server's /latest endpoint to return a pre-defined story.
-        FetchMock.mock("http://localhost:8080/latest", {
-            body: [story]
+        afterEach(() => {
+            // Revert the mocking.
+            FetchMock.restore();
         });
         
-        // Trigger the action!
-        store.dispatch(actions.fetchStories());
+        it("should handle a successful request", (done) => {
+            // Create a mock story.
+            const story = {
+                id: 1,
+                title: "Hello World",
+                url: "https://www.example.com",
+                by: "John Smith"
+            };
 
-        // Revert the mocking.
-        FetchMock.restore();
+            // Initial state of the store
+            const initialState = {};
+            // List out the actions we expect to fire (order matters).
+            const expectedActions = [
+                {type: actions.REQUEST_STORIES},
+                {type: actions.RECEIVE_STORIES, stories: [story]}
+            ];
+            // Construct our mock store.
+            const store = mockStore(initialState, expectedActions, done);
+
+            // Mock the server's /latest endpoint to return a pre-defined story.
+            FetchMock.mock("http://localhost:8080/latest", {
+                body: [story]
+            });
+            
+            // Trigger the action!
+            store.dispatch(actions.fetchStories());
+        });
+
+        it("should handle a failed request", (done) => {
+            // Create a mock error.
+            const error = new Error("Request timed out.");
+            // Initial state of the store
+            const initialState = {};
+            // List out the actions we expect to fire (order matters).
+            const expectedActions = [
+                {type: actions.REQUEST_STORIES},
+                {type: actions.FAILED_STORIES, error}
+            ];
+            // Construct our mock store.
+            const store = mockStore(initialState, expectedActions, done);
+
+            // Mock the server's /latest endpoint to return a pre-defined story.
+            FetchMock.mock("http://localhost:8080/latest", {
+                throws: error
+            });
+            
+            // Trigger the action!
+            store.dispatch(actions.fetchStories());
+        });
+        
     });
     
 });
