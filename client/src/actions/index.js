@@ -1,5 +1,3 @@
-import Fetch from "isomorphic-fetch";
-
 export const REQUEST_STORIES = "REQUEST_STORIES";
 function requestStories() {
     return {
@@ -29,7 +27,7 @@ export function fetchStories() {
     return function(dispatch) {
         dispatch(requestStories());
         
-        return Fetch("http://localhost:8080/latest")
+        return fetch("http://localhost:8080/latest")
             .then(response => response.json())
             .then(stories => dispatch(receieveStories(stories)))
             .catch(err => dispatch(failedStories(err)));
