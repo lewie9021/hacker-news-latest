@@ -17,21 +17,21 @@ describe("Reducers", () => {
     describe("root", () => {
 
         it("should return the initial state", () => {
-            const initialState = getInitialState().toJS();
-            const state = RootReducer(undefined, {});
-
             // Since we are dealing with Immutable data structures,
-            // we need to convert it back to normal JS.
-            expect(state.toJS()).to.eql(initialState);
+            // we need to convert them back to normal JS.
+            const initialState = getInitialState().toJS();
+            const state = RootReducer(undefined, {}).toJS();
+            
+            expect(state).to.eql(initialState);
         });
 
         it("should handle REQUEST_STORIES", () => {
             const initialState = getInitialState();
             const state = RootReducer(initialState, {
                 type: actions.REQUEST_STORIES
-            });
+            }).toJS();
             
-            expect(state.toJS()).to.eql({
+            expect(state).to.eql({
                 ...initialState.toJS(),
                 isFetching: true,
                 failedRequest: false
@@ -44,9 +44,9 @@ describe("Reducers", () => {
             const state = RootReducer(initialState, {
                 type: actions.RECEIVE_STORIES,
                 stories: [story]
-            });
+            }).toJS();
 
-            expect(state.toJS()).to.eql({
+            expect(state).to.eql({
                 ...initialState.toJS(),
                 stories: [story],
                 isFetching: false,
@@ -59,9 +59,9 @@ describe("Reducers", () => {
             const state = RootReducer(initialState, {
                 type: actions.FAILED_STORIES,
                 error: new Error("Request timed out.")
-            });
+            }).toJS();
 
-            expect(state.toJS()).to.eql({
+            expect(state).to.eql({
                 ...initialState.toJS(),
                 isFetching: false,
                 fetchError: true
