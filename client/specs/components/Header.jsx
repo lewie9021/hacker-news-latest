@@ -1,18 +1,21 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import TestUtils from "react-addons-test-utils";
 import { renderComponent } from "./helpers";
 import Header from "../../src/components/Header";
 
 const { expect } = window.chai;
+const Sinon = window.sinon;
 
 // Helper to ensure the UI reacts differently to particular props.
 function renderHeader(props, expectedBtnText) {
     const {output} = renderComponent(Header, props);
     const isFetchingColor = props.isFetching ? "#337ab7" : "#286090";
+    const [btn, heading] = output.props.children;
 
     // Ensure it has some styling (not really concerned about the exact styles).
     expect(output.props.style).to.exist;
 
-    const [btn, heading] = output.props.children;
-    
     // Make sure we have a fetch button.
     expect(btn.props.style).to.exist;
     // Ensure the background of the fetch button changes in response to the 'isFetching' prop.
@@ -43,6 +46,36 @@ describe("components", () => {
                 actions: {},
                 isFetching: true
             }, "Fetching Stories...");
+        });
+
+        it("should call fetchStories if the button is clicked", () => {
+            const fetchSpy = Sinon.spy();
+
+            function simulateClick(Component) {
+                const output = TestUtils.renderIntoDocument(Component);
+                const button = ReactDOM.findDOMNode(output).querySelector("button");
+                
+                // Simulate fetching stories.
+                TestUtils.Simulate.click(button);
+            }
+
+            // We aren't fetching so the button should be clickable.
+            simulateClick(Header({
+                title: "example title",
+                actions: {fetchStories: fetchSpy},
+                isFetching: false
+            }));
+            
+            expect(fetchSpy.callCount).to.eq(1);
+
+            // Fetching is in progress so fetchStories shouldn't be called.
+            simulateClick(Header({
+                title: "example title",
+                actions: {fetchStories: fetchSpy},
+                isFetching: true
+            }));
+
+            expect(fetchSpy.callCount).to.eq(1);
         });
 
     });
