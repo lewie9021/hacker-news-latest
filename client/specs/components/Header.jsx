@@ -8,9 +8,8 @@ const { expect } = window.chai;
 const Sinon = window.sinon;
 
 // Helper to ensure the UI reacts differently to particular props.
-function renderHeader(props, expectedBtnText) {
+function renderHeader(props, {btnText, btnColor}) {
     const {output} = renderComponent(Header, props);
-    const isFetchingColor = props.isFetching ? "#337ab7" : "#286090";
     const [btn, heading] = output.props.children;
 
     // Ensure it has some styling (not really concerned about the exact styles).
@@ -19,9 +18,9 @@ function renderHeader(props, expectedBtnText) {
     // Make sure we have a fetch button.
     expect(btn.props.style).to.exist;
     // Ensure the background of the fetch button changes in response to the 'isFetching' prop.
-    expect(btn.props.style.backgroundColor).to.eq(isFetchingColor);
+    expect(btn.props.style.backgroundColor).to.eq(btnColor);
     expect(btn.props.disabled).to.eq(props.isFetching);
-    expect(btn.props.children).to.eq(expectedBtnText);
+    expect(btn.props.children).to.eq(btnText);
 
     // Check that we are actually rendering a heading.
     expect(heading.props.style).to.exist;
@@ -38,14 +37,20 @@ describe("components", () => {
                 title: "example title one",
                 actions: {},
                 isFetching: false
-            }, "Fetch Latest Stories");
+            }, {
+                btnText: "Fetch Latest Stories",
+                btnColor: "#286090"
+            });
 
-            // The button text should change if we are fetching.
+            // The button text anc color should change if we are fetching.
             renderHeader({
                 title: "second example title",
                 actions: {},
                 isFetching: true
-            }, "Fetching Stories...");
+            }, {
+                btnText: "Fetching Stories...",
+                btnColor: "#337ab7"
+            });
         });
 
         it("should call fetchStories if the button is clicked", () => {
