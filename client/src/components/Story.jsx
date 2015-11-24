@@ -40,7 +40,7 @@ function Story({story, index}) {
 
     return (
         <li style={listItemStyles}>
-            <a href={itemURL} style={styles.title}>
+            <a href={story.get("url")} style={styles.title}>
                 <strong>{story.get("title")}</strong>
             </a>
             <div style={styles.details}>
