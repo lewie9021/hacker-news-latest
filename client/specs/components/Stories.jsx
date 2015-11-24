@@ -1,7 +1,7 @@
 import React from "react";
 import Immutable from "immutable";
 import TestUtils from "react-addons-test-utils";
-import { renderComponent } from "./helpers";
+import { renderComponent, convertPropsToImmutable } from "./helpers";
 import Stories from "../../src/components/Stories";
 import Story from "../../src/components/Story";
 
@@ -9,12 +9,7 @@ const { expect } = window.chai;
 
 // Helper to ensure the UI reacts differently to particular props.
 function renderStories(props) {
-    // Convert each property on 'props' to an Immutable data structure.
-    const immutableProps = Object.keys(props).reduce((map, prop) => {
-        map[prop] = Immutable.fromJS(props[prop]);
-        
-        return map;
-    }, {});
+    const immutableProps = convertPropsToImmutable(props);
     const {output} = renderComponent(Stories, immutableProps);
     const stories = output.props.children;
 
