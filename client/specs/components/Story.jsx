@@ -4,6 +4,7 @@ import { renderComponent, convertPropsToImmutable } from "./helpers";
 import Story from "../../src/components/Story";
 
 const { expect } = window.chai;
+// Example stories used in the specs below.
 const examples = [
     {
         id: 5215884,
@@ -34,7 +35,7 @@ const examples = [
     }
 ];
 
-// A highier order function to remove rendering boilerplate.
+// A higher-order function that helps to remove rendering boilerplate.
 function renderStory(props, runExpectations) {
     const immutableProps = convertPropsToImmutable(props);
     const component = renderComponent(Story, immutableProps);
