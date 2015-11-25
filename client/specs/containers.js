@@ -7,7 +7,7 @@ import { App } from "../src/containers/App";
 
 const { expect } = window.chai;
 const Sinon = window.sinon;
-
+// Example app state used in the specs below.
 const states = [
     {
         isFetching: false,
@@ -47,6 +47,7 @@ describe("Containers", () => {
             function expectations({output}) {
                 const header = output.props.children[0];
 
+                // Make sure the element is a Header component.
                 expect(TestUtils.isElementOfType(header, Header)).to.eq(true);
             }
             
@@ -58,6 +59,7 @@ describe("Containers", () => {
             function expectations({output}) {
                 const header = output.props.children[0];
 
+                // Check that the title is rendered with the correct text.
                 expect(header.props.title).to.eq("Hacker News (Redux)");
             }
             
@@ -69,6 +71,7 @@ describe("Containers", () => {
             function expectations({output}) {
                 const header = output.props.children[0];
 
+                // Check that an object is passed for the 'actions' attribute.
                 expect(header.props.actions).to.exist;
                 expect(header.props.actions).to.be.instanceof(Object);
             }
@@ -81,6 +84,7 @@ describe("Containers", () => {
             function expectations({output}, {isFetching}) {
                 const header = output.props.children[0];
 
+                // Ensure we are passing props.isFetching down to the Header component.
                 expect(header.props.isFetching).to.exist;
                 expect(header.props.isFetching).to.eq(isFetching);
             }
@@ -93,7 +97,10 @@ describe("Containers", () => {
             function expectations({output}, {fetchError}) {
                 const alert = output.props.children[1];
 
+                // Ensure the an Alert component is rendered only when fetchError is true.
                 expect(TestUtils.isElementOfType(alert, Alert)).to.eq(fetchError);
+
+                // Otherwise, it should be null (not rendered at all).
                 expect(alert != null).to.eq(fetchError);
             }
             
@@ -105,7 +112,10 @@ describe("Containers", () => {
             function expectations({output}, props, immutableProps) {
                 const stories = output.props.children[2];
 
+                // Make sure it's a Stories component.
                 expect(TestUtils.isElementOfType(stories, Stories)).to.eq(true);
+
+                // Ensure we are passing the Immutable instance of stories.
                 expect(stories.props.stories).to.eq(immutableProps.stories);
             }
             
