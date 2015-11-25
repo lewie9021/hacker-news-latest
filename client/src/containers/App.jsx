@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import Stories from "../components/Stories";
 import Alert from "../components/Alert";
 
-function App({dispatch, stories, isFetching, fetchError}) {
+export function App({dispatch, stories, isFetching, fetchError}) {
     const actions = bindActionCreators(Actions, dispatch);
     
     return (
