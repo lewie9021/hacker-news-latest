@@ -42,6 +42,10 @@ If a user stumbles upon an error, having the entire application state in a singl
 
 A benefit of Redux is that the store isn't coupled with the logic that handles mutations. This means reducers can be [hot swapped](https://webpack.github.io/docs/hot-module-replacement) without taking out the application state in the process, making iterations extremely fast! Unfortunately, I wasn't able to apply hot swapping for React components during the development of this project due to the major Babel 6 update.
 
+**Testing**
+
+I had a pleasant experience testing Redux components, mainly because it tries to keep the application as pure as possible. I didn't have to deal with class instances that would require cleanup after each spec to avoid state pollution. Redux is mostly built around simple functions that given the same input, will always provide the same output. With that said, even the async action creators which produced side-effects were relatively easy to test thanks to redux-mock-store.
+
 **Inline Styles**
 
 I tried to stay away from CSS throughout this project as an opportunity to explore inline styles with React. It was an interesting experience. I was able to tweak the styling of the application in a much more direct approach. With CSS, you have to do this via proxy, that is, to apply a particular CSS class to an element. While this helps to keep the markup clean, it does leave your UI open to bugs. The JavaScript doesn't have full control over what styles are applied. It has to make an assumption that there is a CSS rule somewhere in your stylesheet(s) that will take care of it.
