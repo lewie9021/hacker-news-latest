@@ -44,9 +44,9 @@ A benefit of Redux is that the store isn't coupled with the logic that handles m
 
 **Testing**
 
-I had a pleasant experience testing Redux components. I think this was mainly because of the way it tries to keep the application as pure as possible. I didn't have to deal with class instances that would require cleanup after each spec to avoid state pollution. Redux is mostly built around simple functions that given the same input, will always provide the same output. With that said, even the async action creators which produced side-effects were relatively easy to test thanks to redux-mock-store.
+I had a pleasant experience testing Redux components. I think this was mainly because of the way it tries to make the application as pure as possible. I didn't have to deal with class instances that would require cleanup after each spec to avoid state pollution. Redux is mostly built around simple functions that given the same input, will always provide the same output. With that said, even the async action creators that produce side-effects were relatively easy to test thanks to redux-mock-store.
 
-In this project, I decided to change the way I wrote specs to avoid testing implementation detail. Previously, I used a range of stubbing tricks to gain access to the internals, making it very difficult to change even subtle parts of the code, without having to fix a number of failing specs. Writing specs in this way meant that I didn't need to make extensive use of the Sinon library. I found that I only needed its spying functionality to ensure action creators were triggered correctly.
+In this project, I decided to change the way I wrote specs to avoid testing implementation detail. Previously, I used a range of stubbing tricks to gain access to the internals, making it very difficult to change even subtle parts of the code, without having to fix a number of failing specs. Writing specs in this way meant that I didn't need to make extensive use of the Sinon library either. I found that I only needed its spying functionality to ensure action creators were triggered correctly.
 
 **Inline Styles**
 
