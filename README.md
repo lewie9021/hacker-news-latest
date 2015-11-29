@@ -12,39 +12,37 @@ After reading a large potion of the [offical documentation](http://rackt.org/red
 
 At the start of the week, I began reading the official Redux documentation. It was nice to see that each part had its own section, making it easier to digest the core concepts. If it had been a continuous stream of text, I'd have likely found myself attempting to read the entire documentation all at once. Browsing the project's [GitHub repository](https://github.com/rackt/redux/) revealed the docs are frequently kept update with any API changes and/or helpful tips and tricks.
 
-I found the offical code examples to be a great help, offering guidance on how I should connect the pieces of Redux together. It was quite refreshing to find [other examples](http://rackt.org/redux/docs/introduction/Examples), not just the generic TODO application.
+I found the offical code examples to be a great help, offering guidance on how I should connect the pieces of Redux together. It was quite refreshing to find [other examples](http://rackt.org/redux/docs/introduction/Examples), not just the generic todo application.
 
 At this point however, I was still unsure how actions made their way through the application. Luckily, I found [this article](https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6) that personified the Redux architecture through a series of interesting cartoon drawings.
 
 **Immutable**
 
-Lee Byron, the author of a library called [Immutable](https://github.com/facebook/immutable-js), gave an [outstanding talk](https://www.youtube.com/watch?v=I7IdS-PbEgI) at React Conf early this year. He demonstrated some of the great advantages developers could harness with immutable data structures. Naturally, some of the talk was base around how to increase the performance of React by using the shouldComponentUpdate lifecycle hook.
+Lee Byron, the author of a library called [Immutable](https://github.com/facebook/immutable-js), gave an [outstanding talk](https://www.youtube.com/watch?v=I7IdS-PbEgI) at React Conf earlier this year. He demonstrated some of the great advantages developers could harness with immutable data structures. Naturally, some of the talk was base around how to increase the performance of React by using the shouldComponentUpdate lifecycle hook.
 
 One of the reasons immutable data structures are so powerful is because mutations return new object references. This makes comparing state changes trivial, as only reference checks are required as opposed to deep comparison checks (dirty checking).
 
 As it turns out, immutable data structures are an integral part to Redux. It's how the store determines if a change has been made by a reducer.
 
-Unfortunately, my experience with Immutable was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong while troubleshooting. In the end, I found the best way was to just experiment in the console.
-
-Through perseverance, I was able to grasp the fundamentals of Immutable, and found it was a great combination with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
+Unfortunately, my experience with Immutable was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong while troubleshooting. In the end, I found the best way was to just experiment in the console. However, once I started to understand the fundamentals of Immutable, I realised what a great combination it was with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
 
 **Central App State**
 
-The idea of using a single store for the entire application felt quite intimidating. In the original Flux implementation, an application could have several stores, each responsible for a particular domain. The question with Redux was:
+The idea of using a single store for the entire application felt quite intimidating. In the original Flux implementation, an application could have several stores, each responsible for a particular domain. The question I had with Redux was:
 
 > How would I structure the store of a large application with several screens and a lot of user interaction?
 
-I found the best advice was to structure the store in a similar way to a relational database. Normalization could be implemented to reduce issues that arise, trying to keep the same data in several places in sync. I've yet to look further into route-driven applications with Redux, but I could imagine the store would contain a 'routes' property at the top level that maps route paths to route specific state. Route state would be kept minimal, often storing foreign keys pointing to other areas of the store (in this application, it would contain story IDs rather than the actual stories).
+I found the best advice was to structure the store in a similar way to a relational database. Normalization could help reduce issues such as trying to keep the same data in several places in sync. I've yet to look further into route-driven applications with Redux, but I imagine the store would contain a 'routes' property at the top level that maps route paths to route specific state. Route state would be kept minimal, often storing foreign keys pointing to other areas of the store (in this application, it would contain story IDs rather than the actual stories).
 
-If a user stumbles upon an error, having the entire application state in a single object can be very beneficial. Bug reporting could be implemented by simply sending a dump of the application state at the time the bug occurred. Later, a developer could replace their application state with that of the user, making the debugging process much slicker. Improving this, the bug reporter could also send the last 10 actions that were triggered, providing hints on what the user was attempting to achieve.
+If a user stumbles upon an error, having the entire application state in a single object can be very beneficial. Bug reporting could be implemented by simply sending a dump of the application state at the time the bug occurred. Later, a developer could replace their application state with that of the user, making the debugging process much slicker. Improving this, the bug reporter could also send a series of actions that were triggered just before the crash, providing hints on what the user was attempting to achieve.
 
 **Hot Module Replacement**
 
-A benefit of Redux is that the store isn't coupled with the logic that handles mutations. This means reducers can be [hot swapped](https://webpack.github.io/docs/hot-module-replacement) without taking out the application state in the process, making iterations extremely fast! Unfortunately, I wasn't able to apply hot swapping for React components during the development of this project due to the major Babel 6 update.
+A benefit of Redux is that the store isn't coupled with the logic that handles mutations. This means reducers can be [hot swapped](https://webpack.github.io/docs/hot-module-replacement) without wiping out the application state in the process, making iterations extremely fast! Unfortunately, I wasn't able to apply [hot swapping for React components](https://github.com/gaearon/babel-plugin-react-transform) during the development of this project due to the major Babel 6 update.
 
 **Testing**
 
-I had a pleasant experience testing Redux components. I think this was mainly because of the way it tries to make the application as pure as possible. I didn't have to deal with class instances that would require cleanup after each spec to avoid state pollution. Redux is mostly built around simple functions that given the same input, will always provide the same output. With that said, even the async action creators that produce side-effects were relatively easy to test thanks to redux-mock-store.
+I had a pleasant experience testing Redux components. I think this was mainly because of the way it tries to make the application as pure as possible. I didn't have to deal with class instances that would require cleanup after each spec to avoid state pollution. Redux is mostly built around simple functions that given the same input, will always provide the same output. With that said, even the async action creators that produce side-effects were relatively easy to test thanks to [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store).
 
 I encountered an issue quite early on with IE in particular, as it was lacking implementations for ES6 features such as Promises. When I ran the specs with Karma, isomorphic-fetch would fail to find the Promise constructor on the window. Since this project is using the newly released Babel 6, it's possible that the older versions shipped polyfills by default.
 
