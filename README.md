@@ -50,9 +50,9 @@ Trying to mock isomorphic-fetch proved harder than I thought. I spent hours tryi
 
 In this project, I decided to change the way I wrote specs to avoid testing implementation detail. Previously, I used a range of stubbing tricks to gain access to the internals, making it very difficult to change even subtle parts of the code, without having to fix a number of failing specs. Writing specs in this way meant that I didn't need to make extensive use of the Sinon library either. I found that I only needed its spying functionality to ensure action creators were triggered correctly.
 
-The Story component was one of the last components I tested. I realised I'd made the mistake of grouping together too many expectations into a single spec. When a spec failed, it was difficult to locate exactly what went wrong without scanning through the code. What made matters worse was I often named the specs "it should render correctly".
+By the time I began testing the Story component, I realised I'd made the mistake of grouping together too many expectations into a single spec. When a spec failed, it was difficult to locate exactly what went wrong without scanning through the code. What made matters worse was I often named the specs *"it should render correctly"*. I decided to split out the expectations into specs with descriptive names. Doing so, made it easy to identify exactly what the component should achieve, while simplifying the debugging process of failing specs.
 
-I wanted to tackle the issue I described above by splitting out expectations into specs with descriptive names. Doing so, made it much easier to identify exactly what the component should achieve, while simplifying the debugging process of failing specs.
+Using inline styles with React components opened up a new way of testing UI. I was able to pick out important styles and ensure they were applied as expected. For instance, the styling for the list group requires the first item to have a border-top.
 
 **Inline Styles**
 
