@@ -52,6 +52,8 @@ In this project, I decided to change the way I wrote specs to avoid testing impl
 
 By the time I began testing the Story component, I realised I'd made the mistake of grouping together too many expectations into a single spec. When a spec failed, it was difficult to locate exactly what went wrong without scanning through the code. What made matters worse was I often named the specs *"it should render correctly"*. I decided to split out the expectations into specs with descriptive names. Doing so, made it easy to identify exactly what the component should achieve, while simplifying the debugging process of failing specs.
 
+A common issue I had was that the specs would only test a particular behaviour with one set of data. To tackle this problem, I had each spec run through the expectations across several data sets defined at the top of file. These state scenarios worked as sanity checks to ensure the tests aren't flagging as false positives. For instance, testing the addition functionality of a calculator would require several data sets to ensure it's working as expected. One of the reasons is that it's possible the spec could pass if the method simply returned the expected result without any calculations.
+
 Using inline styles with React components opened up a new way of testing UI. I was able to pick out important styles and ensure they were applied as expected. For instance, the styling for the list group requires the first item to have a border-top rule.
 
 **Inline Styles**
