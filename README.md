@@ -52,7 +52,7 @@ In this project, I decided to change the way I wrote specs to avoid testing impl
 
 By the time I began testing the Story component, I realised I'd made the mistake of grouping together too many expectations into a single spec. When a spec failed, it was difficult to locate exactly what went wrong without scanning through the code. What made matters worse was I often named the specs *"it should render correctly"*. I decided to split out the expectations into specs with descriptive names. Doing so, made it easy to identify exactly what the component should achieve, while simplifying the debugging process of failing specs.
 
-Using inline styles with React components opened up a new way of testing UI. I was able to pick out important styles and ensure they were applied as expected. For instance, the styling for the list group requires the first item to have a border-top.
+Using inline styles with React components opened up a new way of testing UI. I was able to pick out important styles and ensure they were applied as expected. For instance, the styling for the list group requires the first item to have a border-top rule.
 
 **Inline Styles**
 
@@ -60,4 +60,4 @@ I tried to stay away from CSS throughout this project as an opportunity to explo
 
 While the majority of the experience went quite well, I did however run into a problem regarding the :hover state of an element. Although you could in fact implement this using a combination of mouse enter/leave events and a hover state property, it certainly isn't as elegant as the CSS counterpart. A more difficult problem would be to implement media queries such that an onresize event handler isn't attached for each component that's mounted.
 
-Since the focus of this project was to understand Redux, I decided to opt out of an inline style solution when it came to anything more advanced such as element state styles and media queries. Instead, I created a style tag in the main HTML file (it didn't feel necessary to add both style-loader and css-loader to my Webpack configuration for a few lines of styling). Going forward, I would like to investigate a solution such as Radium that tries to solve these problems.
+Since the focus of this project was to understand Redux, I decided to opt out of an inline style solution when it came to anything more advanced such as element state styles and media queries. Instead, I created a style tag in the main HTML file (it didn't feel necessary to add both [style-loader](https://github.com/webpack/style-loader) and [css-loader](https://github.com/webpack/css-loader) to my Webpack configuration for a few lines of styling). Going forward, I would like to investigate a solution such as [Radium](https://github.com/FormidableLabs/radium) that tries to solve these problems.
