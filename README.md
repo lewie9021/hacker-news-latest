@@ -56,7 +56,7 @@ Using inline styles with React components opened up a new way of testing UI. I w
 
 **Inline Styles**
 
-I tried to stay away from CSS throughout this project as an opportunity to explore inline styles with React. It was an interesting experience. I was able to tweak the styling of the application in a much more direct approach. With CSS, you have to do this via proxy, that is, to apply a particular CSS class to an element. While this helps to keep the markup clean, it does leave your UI open to bugs. The JavaScript doesn't have full control over what styles are applied. It has to make an assumption that there is a CSS rule somewhere in your stylesheet(s) that will take care of it.
+I tried to stay away from CSS throughout this project as an opportunity to explore inline styles with React. It was an interesting experience. I was able to tweak the styling of the application in a much more direct approach. With CSS, you have to do this via proxy, that is, to either apply an id or a class to an element. While this helps to keep the markup clean, it does leave your UI open to bugs. The JavaScript doesn't have full control over what styles are applied. It has to make an assumption that there is a CSS rule somewhere in your stylesheet(s) that will take care of it.
 
 While the majority of the experience went quite well, I did however run into a problem regarding the :hover state of an element. Although you could in fact implement this using a combination of mouse enter/leave events and a hover state property, it certainly isn't as elegant as the CSS counterpart. A more difficult problem would be to implement media queries such that an onresize event handler isn't attached for each component that's mounted.
 
