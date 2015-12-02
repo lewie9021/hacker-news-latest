@@ -10,21 +10,21 @@ After reading a large potion of the [offical documentation](http://rackt.org/red
 
 ### Thoughts / Experience
 
-At the start of the week, I began reading the official Redux documentation. It was nice to see that each part had its own section, making it easier to digest the core concepts. If it had been a continuous stream of text, I'd have likely found myself attempting to read the entire documentation all at once. Browsing the project's [GitHub repository](https://github.com/rackt/redux/) revealed the docs are frequently kept update with any API changes and/or helpful tips and tricks.
+Before I started work on this project, I first read the official Redux documentation. It was nice to see that each part had its own section, making it easier to digest the core concepts. I found the offical code examples to be a great help, offering guidance on how I should connect the pieces of Redux together. It was quite refreshing to find [other examples](http://rackt.org/redux/docs/introduction/Examples), not just the generic todo application.
 
-I found the offical code examples to be a great help, offering guidance on how I should connect the pieces of Redux together. It was quite refreshing to find [other examples](http://rackt.org/redux/docs/introduction/Examples), not just the generic todo application.
-
-At this point however, I was still unsure how actions made their way through the application. Luckily, I found [this article](https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6) that personified the Redux architecture through a series of interesting cartoon drawings.
+Although I'd read most the docs, I was still unsure how actions made their way through the application. Fortunately, I found [this article](https://code-cartoons.com/a-cartoon-intro-to-redux-3afb775501a6) that personified the Redux architecture through a series of interesting cartoon drawings.
 
 **Immutable**
 
-Lee Byron, the author of a library called [Immutable](https://github.com/facebook/immutable-js), gave an [outstanding talk](https://www.youtube.com/watch?v=I7IdS-PbEgI) at React Conf earlier this year. He demonstrated some of the great advantages developers could harness with immutable data structures. Naturally, some of the talk was base around how to increase the performance of React by using the shouldComponentUpdate lifecycle hook.
+Lee Byron, the author of a library called [Immutable](https://github.com/facebook/immutable-js), gave an [outstanding presentation](https://www.youtube.com/watch?v=I7IdS-PbEgI) at React Conf earlier this year. The talk was largely around the advantages of immutablity and the problems it tries to solve. He later explains how it can improve the performance of React using the shouldComponentUpdate lifecycle hook.
 
-One of the reasons immutable data structures are so powerful is because mutations return new object references. This makes comparing state changes trivial, as only reference checks are required as opposed to deep comparison checks (dirty checking).
+One of the reasons immutability is so powerful is because making mutations produce new references. This makes comparing state changes trivial, as only cheap reference checks are required as opposed to expensive deep comparison checks (often referred to as dirty checking).
 
-As it turns out, immutable data structures are an integral part to Redux. It's how the store determines if a change has been made by a reducer.
+Implementing undo functionality becomes remarkably easy with immutability. After a mutation is made, the new reference can be stored in a 'history' array. When the user hits undo, we apply the penultimate item in the array to reveal the previous state. Thanks to [structural sharing](https://en.wikipedia.org/wiki/Persistent_data_structure), this isn't as memory intensive as you might think. Where mutable structures would require a deep clone for each state change, immutable structures can make guarantees about the data. In particular, it knows the data can not be directly changed, therefore it tries to make use of as much of the last state as possible.
 
-Unfortunately, my experience with Immutable was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong while troubleshooting. In the end, I found the best way was to just experiment in the console. However, once I started to understand the fundamentals of Immutable, I realised what a great combination it was with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
+As it turns out, immutability is an integral part of Redux. It's how the store determines if a change has been made by a reducer.
+
+Unfortunately, my experience with Immutable library was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong while troubleshooting. In the end, I found the best way was to just experiment in the console. However, once I started to understand the fundamentals of Immutable, I realised what a great combination it was with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
 
 **Central App State**
 
