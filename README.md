@@ -6,7 +6,7 @@ A small web application that displays the latest stories on HackerNews.
 
 Studying the Redux architecture has been something I've wanted to do for a [while](https://www.youtube.com/watch?v=xsSnOQynTHs), but I was skeptical about its life-span. I witnessed the flurry of Flux inspired libraries come and go, but none of them really caught my eye. Some of their design choices made me question how they would cope at scale, one of the main problems the [original](https://github.com/facebook/flux) Flux library tried to solve.
 
-After reading a large potion of the [offical documentation](http://rackt.org/redux), it felt like a good time to put the theory I'd learnt into practce. I needed a project idea that wasn't too complex, but covered enough to exercise common problems such as async operations and error handling. I decided I would create a basic application that talks to the [HackerNews API](https://github.com/HackerNews/API).
+After reading a large portion of the [official documentation](http://rackt.org/redux), it felt like a good time to put the theory I'd learnt into practice. I needed a project idea that wasn't too complex, but covered enough to exercise common problems such as async operations and error handling. I decided I would create a basic application that talks to the [HackerNews API](https://github.com/HackerNews/API).
 
 ### Thoughts / Experience
 
@@ -16,7 +16,7 @@ Although I'd read most the docs, I was still unsure how actions made their way t
 
 **Immutable**
 
-Lee Byron, the author of a library called [Immutable](https://github.com/facebook/immutable-js), gave an [outstanding presentation](https://www.youtube.com/watch?v=I7IdS-PbEgI) at React Conf earlier this year. The talk was largely around the advantages of immutablity and the problems it tries to solve. He later explains how it can improve the performance of React using the shouldComponentUpdate lifecycle hook.
+Lee Byron, the author of a library called [Immutable](https://github.com/facebook/immutable-js), gave an [outstanding presentation](https://www.youtube.com/watch?v=I7IdS-PbEgI) at React Conf earlier this year. The talk was largely around the advantages of immutability and the problems it tries to solve. He later explains how it can improve the performance of React using the shouldComponentUpdate lifecycle hook.
 
 One of the reasons immutability is so powerful is because making mutations produce new references. This makes comparing state changes trivial, as only cheap reference checks are required as opposed to expensive deep comparison checks (often referred to as dirty checking).
 
@@ -30,7 +30,7 @@ Unfortunately, my experience with the Immutable library was far from a walk in t
 
 The idea of using a single store for the entire application felt quite intimidating. In the original Flux implementation, an application could have several stores, each responsible for a particular domain. The question I had with Redux was:
 
-> How would I structure the store of a large application with several screens and a lot of user interaction?
+> How would I structure the Store of a large application with several screens and a lot of user interaction?
 
 I found the best advice was to structure the store in a similar way to a relational database. Normalization could help reduce issues such as trying to keep the same data in several places in sync. I've yet to look further into route-driven applications with Redux, but I imagine the store would contain a 'routes' property at the top level that maps route paths to route specific state. Route state would be kept minimal, often storing foreign keys pointing to other areas of the store (in this application, it would contain story IDs rather than the actual stories).
 
