@@ -4,7 +4,7 @@ A small web application that displays the latest stories on HackerNews.
 
 ### Motivation
 
-Studying the Redux architecture has been something I've wanted to to do for a [while](https://www.youtube.com/watch?v=xsSnOQynTHs), but I was skeptical about its life-span. I witnessed the flurry of Flux inspired libraries come and go, but none of them really caught my eye. Some of their design choices made me question how they would cope at scale, one of the main problems the [original](https://github.com/facebook/flux) Flux library tried to solve.
+Studying the Redux architecture has been something I've wanted to do for a [while](https://www.youtube.com/watch?v=xsSnOQynTHs), but I was skeptical about its life-span. I witnessed the flurry of Flux inspired libraries come and go, but none of them really caught my eye. Some of their design choices made me question how they would cope at scale, one of the main problems the [original](https://github.com/facebook/flux) Flux library tried to solve.
 
 After reading a large potion of the [offical documentation](http://rackt.org/redux), it felt like a good time to put the theory I'd learnt into practce. I needed a project idea that wasn't too complex, but covered enough to exercise common problems such as async operations and error handling. I decided I would create a basic application that talks to the [HackerNews API](https://github.com/HackerNews/API).
 
@@ -24,7 +24,7 @@ Implementing undo functionality becomes remarkably easy with immutability. After
 
 As it turns out, immutability is an integral part of Redux. It's how the store determines if a change has been made by a reducer.
 
-Unfortunately, my experience with Immutable library was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong while troubleshooting. In the end, I found the best way was to just experiment in the console. However, once I started to understand the fundamentals of Immutable, I realised what a great combination it was with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
+Unfortunately, my experience with with Immutable library was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong while troubleshooting. In the end, I found the best way was to just experiment in the console. However, once I understood the fundamentals of Immutable, I realised what a great combination it was with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
 
 **Central App State**
 
