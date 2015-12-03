@@ -24,7 +24,7 @@ Implementing undo functionality becomes remarkably easy with immutability. After
 
 As it turns out, immutability is an integral part of Redux. It's how the store determines if a change has been made by a reducer.
 
-Unfortunately, my experience with with Immutable library was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong while troubleshooting. In the end, I found the best way was to just experiment in the console. However, once I understood the fundamentals of Immutable, I realised what a great combination it was with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
+Unfortunately, my experience with the Immutable library was far from a walk in the park. The documentation lacked examples on how to use each method, and the unfamiliar syntax that described them, made it hard to understand what I was doing wrong while troubleshooting. In the end, I found the best way was to just experiment in the console. However, once I understood the fundamentals of Immutable, I realised what a great combination it was with Redux. In comparison to the official examples that use Object.assign, the logic inside the reducers felt much cleaner and easier to read.
 
 **Central App State**
 
@@ -44,9 +44,9 @@ A benefit of Redux is that the store isn't coupled with the logic that handles m
 
 I had a pleasant experience testing Redux components. I think this was mainly because of the way it tries to make the application as pure as possible. I didn't have to deal with any class instances that require cleanup after each spec to avoid state pollution. Redux is mostly built around simple functions that given the same input, will always provide the same output. With that said, even async action creators that produce side-effects were relatively easy to test thanks to [redux-mock-store](https://github.com/arnaudbenard/redux-mock-store).
 
-I encountered an issue quite early on with IE due to its lack of ES6 features, particularly Promises. When I ran the specs with Karma, isomorphic-fetch would fail to find the Promise constructor on the window. Since this project is using the newly released Babel 6, it's possible that the older versions shipped polyfills by default.
+I encountered an issue quite early on with IE due to its lack of ES6 features, particularly Promises. When I ran the specs with [Karma](https://github.com/karma-runner/karma), [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) would fail to find the Promise constructor on the window. Since this project is using the newly released Babel 6, it's possible that the older versions shipped polyfills by default.
 
-Trying to mock isomorphic-fetch proved harder than I thought. I spent hours trying to get fetch-mock to play nicely with it. I needed to mock the network requests so that the RESTful API server wasn't a dependency. In the end, I had to import isomorphic-fetch onto the window object so that fetch-mock could work its magic.
+Trying to mock isomorphic-fetch proved harder than I thought. I spent hours trying to get [fetch-mock](https://github.com/wheresrhys/fetch-mock) to play nicely with it. I needed to mock the network requests so that the RESTful API server wasn't a dependency. In the end, I had to import isomorphic-fetch onto the window object so that fetch-mock could work its magic.
 
 In this project, I decided to change the way I wrote specs to avoid testing implementation detail. Previously, I used a range of stubbing tricks to gain access to the internals, making it very difficult to change even subtle parts of the code, without having to fix a number of failing specs. Writing specs in this way meant that I didn't need to make extensive use of the Sinon library either. I found that I only needed its spying functionality to ensure action creators were triggered correctly.
 
