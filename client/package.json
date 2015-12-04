@@ -2,7 +2,7 @@
   "name": "redux-hackernews-client",
   "version": "1.0.0",
   "description": "A simple HackerNews application to experiment with Redux and React.",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "node server.js",
     "test": "node_modules/.bin/karma start config/test/karma.config.js"
