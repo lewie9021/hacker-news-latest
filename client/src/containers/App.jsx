@@ -13,7 +13,7 @@ export function App({dispatch, stories, isFetching, fetchError}) {
     return (
         <div>
             <Header
-              title={"Hacker News (Redux)"}
+              title={"Hacker News Latest"}
               actions={actions}
               isFetching={isFetching}
             />
