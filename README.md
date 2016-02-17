@@ -1,4 +1,4 @@
-# Redux HackerNews
+# Hacker News Latest
 
 A small web application that displays the latest stories on HackerNews.
 

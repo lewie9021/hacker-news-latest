@@ -1,4 +1,4 @@
-# Redux HackerNews (Client)
+# Hacker News Latest (Client)
 
 This directory contains the client application logic, the main focus of the project. Here we explore [Redux](https://www.npmjs.com/package/redux) paired with [immutable data structures](https://www.npmjs.com/package/immutable) and [React](https://www.npmjs.com/package/react). The usefulness of this application isn't important, rather the goal is to understand how Redux works.
 

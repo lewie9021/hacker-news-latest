@@ -1,4 +1,4 @@
-# Redux HackerNews (Server)
+# Hacker News Latest (Server)
 
 This directory contains the RESTful API server. Since I want to explore async operations on the [client](/client), this server helps to abstract away implementation detail when requesting data from the [HackerNews API](https://github.com/hackernews/API).
 
