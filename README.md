@@ -4,9 +4,9 @@ A small web application that displays the latest stories on HackerNews.
 
 ### Motivation
 
-Studying the Redux architecture has been something I've wanted to do for a [while](https://www.youtube.com/watch?v=xsSnOQynTHs), but I was skeptical about its life-span. I witnessed the flurry of Flux inspired libraries come and go, but none of them really caught my eye. Some of their design choices made me question how they would cope at scale, one of the main problems the [original](https://github.com/facebook/flux) Flux library tried to solve.
+Studying the Redux architecture has been something I've wanted to do for a [while](https://www.youtube.com/watch?v=xsSnOQynTHs), but I was skeptical about its life-span. I witnessed the surge of Flux inspired libraries come and go, but none of them really caught my eye. Some of their design choices made me question how they would cope at scale, one of the main problems the [original](https://github.com/facebook/flux) Flux library tried to solve.
 
-After reading a large portion of the [official documentation](http://rackt.org/redux), it felt like a good time to put the theory I'd learnt into practice. I needed a project idea that wasn't too complex, but covered enough to exercise common problems such as async operations and error handling. I decided I would create a basic application that talks to the [HackerNews API](https://github.com/HackerNews/API).
+After reading a large portion of the [official documentation](http://redux.js.org), it felt like a good time to put the theory I'd learnt into practice. I needed a project idea that wasn't too complex, but covered enough to exercise common problems such as async operations and error handling. I decided I would create a basic application that communicates with the [HackerNews API](https://github.com/HackerNews/API).
 
 ### Thoughts / Experience
 
@@ -18,9 +18,9 @@ Although I'd read most the docs, I was still unsure how actions made their way t
 
 Lee Byron, the author of a library called [Immutable](https://github.com/facebook/immutable-js), gave an [outstanding presentation](https://www.youtube.com/watch?v=I7IdS-PbEgI) at React Conf earlier this year. The talk was largely around the advantages of immutability and the problems it tries to solve. He later explains how it can improve the performance of React using the shouldComponentUpdate lifecycle hook.
 
-One of the reasons immutability is so powerful is because making mutations produce new references. This makes comparing state changes trivial, as only cheap reference checks are required as opposed to expensive deep comparison checks (often referred to as dirty checking).
+One of the reasons immutability is so powerful is because mutations produce new references. It makes comparing state changes trivial, as only cheap reference checks are required as opposed to expensive deep comparison checks (often referred to as dirty checking).
 
-Implementing undo functionality becomes remarkably easy with immutability. After a mutation is made, the new reference can be stored in a 'history' array. When the user hits undo, we apply the penultimate item in the array to reveal the previous state. Thanks to [structural sharing](https://en.wikipedia.org/wiki/Persistent_data_structure), this isn't as memory intensive as you might think. Where mutable structures would require a deep clone for each state change, immutable structures can make guarantees about the data. In particular, it knows the data can not be directly changed, therefore it tries to make use of as much of the last state as possible.
+Implementing undo functionality becomes remarkably easy with immutability. After a mutation is made, the new reference can be stored in a 'history' array. When the user hits undo, we apply the penultimate item in the array to reveal the previous state. Thanks to [structural sharing](https://en.wikipedia.org/wiki/Persistent_data_structure), this isn't as memory intensive as you might think. Where mutable structures would require a deep clone for each state change, immutable structures can make guarantees about the data. In particular, it knows the data can not be directly changed, therefore it tries to make use of as much of the previous data structure as possible.
 
 As it turns out, immutability is an integral part of Redux. It's how the store determines if a change has been made by a reducer.
 
